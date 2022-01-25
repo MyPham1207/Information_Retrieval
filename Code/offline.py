@@ -20,6 +20,10 @@ for i in range(len(folder)):
     vector_feature.append(feature)
     vector_name.append(imageList[j])
 
-fv = open('F:/Information Retrieval/Project/Data/featureVector/' + 'Feature_Vector.py', 'wb')
-pickle.dump(vectors, fv)
+fv = open('F:/Information Retrieval/Project/Code/featureVector/' + 'Feature_Vector.py', 'wb')
+pickle.dump(vector_feature, fv)
 fv.close()
+
+fn = open('F:/Information Retrieval/Project/Code/featureVector/' + 'Name_Vector.py', 'wb')
+pickle.dump(vector_name, fn)
+fn.close()
