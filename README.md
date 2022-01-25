@@ -2,7 +2,11 @@
 
 1. Data
 
----Paris6k
+  Paris6k
 
 2. Code
-featureVector.py: 
+
+- featureExtractor.py: Contain class FeatureExtractor.
+- offline.py: Process the images.
+- page.html: Template html of image search engine.
+- app.py: Run web application using Flask.
