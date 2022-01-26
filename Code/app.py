@@ -4,36 +4,39 @@ from featureExtractor import FeatureExtractor
 from datetime import datetime
 from pathlib import Path
 import numpy as np
+import pickle
 
 app = Flask(__name__)
 
 # Read img feature
 fe = FeatureExtractor()
-features = []
+featuresVec = []
 img_paths = []
-for feature_path in Path(".featureVector/feature").glob("*.npy"):
-    features.append(np.load(feature_path))
-    img_paths.append(Path("./static/img") / (feature_path.stem + ".jpg"))
-feature = np.array(features)
+
+fv = open('F:/Information Retrieval/Project/Code/featureVector/Feature_Vector.py', 'rb')
+featuresVec = pickle.load(fv)
+featuresVec = np.array(featuresVec)
 
 @app.route("/", methods=["GET", "POST"])
-def home():
-    if request.method == "POST":
-        file = request.files["query_img"]
+def page():
+    #if request.method == "POST":
+        #file = request.files["query_img"]
 
-        img = Image.open(file.stream)
-        uploaded_img_path = "static/uploaded/" + datetime.now().isoformat().replace(":", ".") + "_" + file.filename
-        img.save(uploaded_img_path)
+    #     img = Image.open(file.stream)
+    #     uploaded_img_path = "static/uploaded/" + datetime.now().isoformat().replace(":", ".") + "_" + file.filename
+    #     img.save(uploaded_img_path)
 
-        query = fe.extract(img)
-        dists = np.linalg.norm(feature - query, axis=1)
-        ids = np.argsort(dists)[:30]
-        scores = [(dists[id], img_paths[id]) for id in ids]
+    #     query = fe.extract(img)
+    #     dists = np.linalg.norm(feature - query, axis=1)
+    #     ids = np.argsort(dists)[:30]
+    #     scores = [(dists[id], img_paths[id]) for id in ids]
 
-        print(scores)
+    #     print(scores)
 
-        return render_template("page.html", query_path=uploaded_img_path, scores=scores)
-    else:
-        return render_template("page.html")
+    #     return render_template("page.html", query_path=uploaded_img_path, scores=scores)
+    return render_template("page.html")
+    # else:
+    #     return render_template("page.html")
+    
     
 app.run()
