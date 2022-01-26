@@ -16,6 +16,7 @@ img_paths = []
 fv = open('F:/Information Retrieval/Project/Code/featureVector/Feature_Vector.py', 'rb')
 featuresVec = pickle.load(fv)
 featuresVec = np.array(featuresVec)
+fv.close()
 
 @app.route("/", methods=["GET", "POST"])
 def page():
