@@ -20,10 +20,16 @@ for i in range(len(folder)):
     vector_feature.append(feature)
     vector_name.append(imageList[j])
 
-fv = open('F:/Information Retrieval/Project/Code/featureVector/' + 'Feature_Vector.py', 'wb')
-pickle.dump(vector_feature, fv)
-fv.close()
+# fv = open('F:/Information Retrieval/Project/Code/featureVector/' + 'Feature_Vector.py', 'wb')
+# pickle.dump(vector_feature, fv)
+# fv.close()
 
-fn = open('F:/Information Retrieval/Project/Code/featureVector/' + 'Name_Vector.py', 'wb')
-pickle.dump(vector_name, fn)
-fn.close()
+# fn = open('F:/Information Retrieval/Project/Code/featureVector/' + 'Name_Vector.py', 'wb')
+# pickle.dump(vector_name, fn)
+# fn.close()
+
+vector_feature = np.array(vector_feature)
+np.save('F:/Information Retrieval/Project/Code/featureVector/Feature_Vector.npy', vector_feature, allow_pickle=True)
+
+vector_name = np.array(vector_name)
+np.save('F:/Information Retrieval/Project/Code/featureVector/Name_Vector.npy', vector_name, allow_pickle=True)
