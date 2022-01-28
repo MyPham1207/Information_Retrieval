@@ -13,7 +13,12 @@
 - page.html: Template html of image search engine.
 - app.py: Run web application using Flask.
 
-3. How to run
+3. Usage
+- Extract feature_vector: We have already extracted it but if you want to do it yourself:
+``
+python offline.py
+``
+- To run search image web app:
 ``
 python app.py
 ``
