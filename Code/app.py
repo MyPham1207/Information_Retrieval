@@ -30,7 +30,7 @@ def page():
 
         img = Image.open(file.stream)
         img = img.convert("RGB")
-        uploaded_img_path = "F:/Information Retrieval/Project/Code/uploaded/"+ file.filename
+        uploaded_img_path = "./uploaded/"+ file.filename
         img.save(uploaded_img_path)
 
         query = fe.get_feature(uploaded_img_path)
