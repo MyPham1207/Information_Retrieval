@@ -10,7 +10,7 @@
 
 - featureExtractor.py: Contain class FeatureExtractor.
 - offline.py: Process the images.
-- page.html: Template html of image search engine.
+- page.html: Template html for image search engine.
 - app.py: Run web application using Flask.
 
 3. Usage
