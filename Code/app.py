@@ -29,6 +29,7 @@ def page():
         file = request.files["query_img"]
 
         img = Image.open(file.stream)
+        img = img.convert("RGB")
         uploaded_img_path = "F:/Information Retrieval/Project/Code/uploaded/"+ file.filename
         img.save(uploaded_img_path)
 
@@ -39,10 +40,10 @@ def page():
 
         print(scores)
 
-        return render_template("page.html", query_path=uploaded_img_path, scores=scores)
+        return render_template("test.html", query_path=uploaded_img_path, scores=scores)
 
     else:
-        return render_template("page.html")
+        return render_template("test.html")
     
     
 app.run()
