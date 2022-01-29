@@ -21,4 +21,8 @@ python offline.py
 - To run search image web app:
 ``
 python app.py
+<<<<<<< HEAD
 ``
+=======
+``
+>>>>>>> cc13ed64d2dfb4ea284f8c8d74e6e8c186f719a2
