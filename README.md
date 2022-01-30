@@ -4,7 +4,7 @@
 
 - Paris6k: https://drive.google.com/drive/u/1/folders/1g1bcn1ZyVRbKmsPWWIO4l-vSZuVK7dei
 
-- Make sure the data in the following directory: Project/Data/(Data/paris/...)
+- Make sure the data in the following directory: Search_Engine/static/(Data/paris)
 
 2. Code
 
@@ -21,8 +21,4 @@ python offline.py
 - To run search image web app:
 ``
 python app.py
-<<<<<<< HEAD
 ``
-=======
-``
->>>>>>> cc13ed64d2dfb4ea284f8c8d74e6e8c186f719a2
