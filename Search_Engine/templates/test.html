@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.js"></script>
-
 
 	<title>
 		Simple Image Search Engine
 	</title>
 </head>
 <body>
-	<main role="main" class="container" style="padding-top: 10px;">
+	<main role="main" class="container" style="padding-top: 10px; ">
 	  	<div class="row">
-		    <div class="col-md-6" style="height: 50%; margin: auto;">
+		    <div class="container" style="height: 50%; margin: auto;">
+                <h1>Simple Image Search Engine</h1>
 				<form method="POST" enctype="multipart/form-data" id="post-form">
 					<fieldset class="form-group">
-						<label for="id_image">Image</label><br>
+						<!-- <label for="id_image">Image</label><br> -->
 						<input type="file" id="id_image" name="query_img" accept="image/*"><br>
 					</fieldset>
 					<div class="form-group">
+                        <div class="col-md-6">
                         <div id="image-box" class="image-container"></div>
                         <button class="btn btn-outline-info" id="crop-btn" style="width: 100%; margin-top: 10px; display: none;" type="button">Crop</button>
-				    	<button id="confirm-btn" style="margin-top: 10px;" type="submit">Search</button>
-
-                        <h2>Query:</h2>
-                        {% if query_path %}
-                        <img src="{{ query_path }}" width="300px">
-                        {% endif %}
-                        <h2>Result:</h2>
-                        {% for score in scores %}
-                        <figure stype="float: left; margin-right: 20px; margin-bottom: 20px;">
-                            <img src="{{ score[1] }}" height="200px">
-                            <figcaption>{{ score[0] }}</figcaption>
-                        </figure>
-                        {% endfor %}
-                        
-				    </div>    
+                        </div>
+                        <button id="confirm-btn" style="margin-top: 10px;" type="submit">Search</button> 
+                    </div> 
 				</form>
-			</div>
-		</div>
+                <h2>Query:</h2>
+                {% if query_path %}
+                <img src="{{ query_path }}" width="300px">
+                {% endif %}
+                <h2>Result:</h2>
+                {% for score in scores %}
+                <figure style="float: left; display: inline; margin-right: 20px; margin-bottom: 20px;">
+                    <img src="{{ score[1] }}" height="200px">
+                    <figcaption>{{ score[0] }}</figcaption>
+                </figure>
+                {% endfor %}
+            </div>  
+        </div>          
 	</main>
     <script>
         // image-box is the id of the div element that will store our cropping image preview
@@ -79,9 +79,9 @@
           const cropper = new Cropper(image, {
           autoCropArea: 1,
           viewMode: 1,
-          scalable: false,
-          zoomable: false,
-          movable: false,
+          scalable: true,
+          zoomable: true,
+          movable: true,
           minCropBoxWidth: 200,
           minCropBoxHeight: 200,
           })

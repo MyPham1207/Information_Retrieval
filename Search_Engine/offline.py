@@ -13,7 +13,7 @@ for i in range(len(folder)):
   folderPath = os.path.join(path, folder[i])
   imageList = os.listdir(folderPath)
 
-  for j in range(10):
+  for j in range(len(imageList)):
     imgPath = os.path.join(folderPath, imageList[j])
     print('Processing: ', imageList[j])
     feature = featuresVec.get_feature(imgPath)
