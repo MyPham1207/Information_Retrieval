@@ -5,6 +5,7 @@ from datetime import datetime
 from pathlib import Path
 import numpy as np
 import pickle
+from online import cosine_distance
 
 app = Flask(__name__)
 
@@ -27,8 +28,13 @@ def page():
         img.save(uploaded_img_path)
 
         query = fe.get_feature(uploaded_img_path)
-        dists = np.linalg.norm(featuresVec - query, axis=1)
-        ids = np.argsort(dists)[:30]
+        #dists = np.linalg.norm(featuresVec - query, axis=1)
+        dists = []
+        for fv in featuresVec:
+            cosine = cosine_distance(query, fv)
+            dists.append(cosine)
+        ids = np.argsort(dists)
+        ids = np.flip(ids)[:30]
         scores = [(dists[id], img_paths[id]) for id in ids]
 
         print(scores)
