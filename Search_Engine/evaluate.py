@@ -13,16 +13,6 @@ img_paths = np.load('./static/featureVector/Name_Vector.npy', allow_pickle=True)
 codeword = np.load('./static/featureVector/codeword.npy', allow_pickle=True)
 pqcode = np.load('./static/featureVector/pqcode.npy', allow_pickle=True)
 
-def get_sort(path_query):
-    query = fe.get_feature(path_query)
-    dists = []
-    for fv in featuresVec:
-        cosine = cosine_distance(query, fv)
-        dists.append(cosine)
-    ids = np.argsort(dists)
-    ids = np.flip(ids)
-    return ids
-
 def get_sort_pq(path_query):
     query = fe.get_feature(path_query)
     dists = search(codeword, pqcode, query)
@@ -80,7 +70,6 @@ def evaluation():
     path_groundtruth = 'static/ground truth'
     groundtruth = os.listdir(path_groundtruth)
     count = 0
-    sum = 0
     sum_pq = 0
     for i in range(len(groundtruth)):
         if 'query' in groundtruth[i]:
@@ -94,19 +83,13 @@ def evaluation():
             data = f.read().split(' ')
             query = data[0]
             query = os.path.join(path_query, query) + '.jpg'
-            sort = get_sort(query)
             sort_pq = get_sort_pq(query)
-            result = get_result(sort, len(positive))
             result_pq = get_result(sort_pq, len(positive))
-            ap = get_ap(result, junk, positive)
             ap_pq = get_ap(result_pq, junk, positive)
-            sum += ap
             sum_pq += ap_pq
-    map = sum/count
     map_pq = sum_pq/count
-    return map, map_pq
+    return map_pq
 
 if __name__ == '__main__':
-    map, map_pq = evaluation()
-    print(map)
+    map_pq = evaluation()
     print(map_pq)

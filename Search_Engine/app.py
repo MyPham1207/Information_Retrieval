@@ -5,7 +5,7 @@ from datetime import datetime
 from pathlib import Path
 import numpy as np
 import pickle
-from distance import cosine_distance
+from distance import search
 import time
 
 app = Flask(__name__)
@@ -15,7 +15,8 @@ fe = FeatureExtractor()
 featuresVec = []
 img_paths = []
 
-featuresVec = np.load('./static/featureVector/Feature_Vector.npy', allow_pickle=True)
+codeword = np.load('./static/featureVector/codeword.npy', allow_pickle=True)
+pqcode = np.load('./static/featureVector/pqcode.npy', allow_pickle=True)
 img_paths = np.load('./static/featureVector/Name_Vector.npy', allow_pickle=True)
 
 @app.route("/", methods=["GET", "POST"])
@@ -32,13 +33,8 @@ def page():
         print(start)
 
         query = fe.get_feature(uploaded_img_path)
-        #dists = np.linalg.norm(featuresVec - query, axis=1)
-        dists = []
-        for fv in featuresVec:
-            cosine = cosine_distance(query, fv)
-            dists.append(cosine)
-        ids = np.argsort(dists)
-        ids = np.flip(ids)[:30]
+        dists = search(codeword, pqcode, query)
+        ids = np.argsort(dists)[:30]
         scores = [(dists[id], img_paths[id]) for id in ids]
 
         end = time.time()
@@ -47,10 +43,10 @@ def page():
         print(scores)
         print(end-start)
 
-        return render_template("test.html", query_path=uploaded_img_path, scores=scores)
+        return render_template("page.html", query_path=uploaded_img_path, scores=scores)
 
     else:
-        return render_template("test.html")
+        return render_template("page.html")
     
     
 app.run()
