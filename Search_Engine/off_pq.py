@@ -1,3 +1,5 @@
+# source code tham khảo từ [Paper Explained] Product Quantization for Approximate Nearest Neighbor Search, Phan Huy Hoàng
+# https://viblo.asia/p/paper-explained-product-quantization-for-approximate-nearest-neighbor-search-yMnKMA6gK7P
 from featureExtractor import FeatureExtractor
 import os
 import numpy as np
@@ -49,12 +51,9 @@ def encode(codeword, vec):
 
 
 if __name__ == '__main__':
-    #N, Nt, D = 6337, 5063, 2048
     N, D = 6337, 2048
     vec = np.load('./static/featureVector/Feature_Vector.npy', allow_pickle=True)
-    #vec_train = np.load('./static/featureVector/Feature_Vector_train.npy', allow_pickle=True)
-    M = 128  # chia query-vector thành thành M sub-vector
-    #codeword = train(vec_train, M)  # tiến hành tạo codeword bằng k-means, số cluster lấy mặc định = 256
+    M = 8  # chia query-vector thành thành M sub-vector
     codeword = train(vec, M)
     pqcode = encode(codeword, vec)  # tạo pqcode lấy tập dữ liệu training
     np.save('./static/featureVector/codeword.npy', codeword, allow_pickle=True)
